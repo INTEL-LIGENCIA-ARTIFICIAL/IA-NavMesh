@@ -1,0 +1,17 @@
+2 enemy
+1
+Smoothing the corners
+
+
+Agent 1 (Patrolling Movement) 🗺️:
+
+Implement patrolling behavior using waypoints.
+Apply the ghost smoothing technique for smooth transitions.
+The initial point and direction should be randomly selected.
+第一个巡走标记点，起始位置随机，方向随机，使用Smoothing the corners
+
+Agent 2 (Wandering Movement) 🌪️:
+
+Implement wandering behavior where the agent moves unpredictably within the scene.
+
+全场随即巡逻
