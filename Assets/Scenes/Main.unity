@@ -360,9 +360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 178409881}
-  rangesphere: 40
   centrePoint: {fileID: 1760330222}
   player: {fileID: 901075408}
+  range: 40
   detectionRadius: 10
 --- !u!195 &178409881
 NavMeshAgent:
