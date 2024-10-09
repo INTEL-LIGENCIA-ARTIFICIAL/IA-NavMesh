@@ -6,18 +6,27 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private Transform player;
+    // Cambiamos 'private' a 'public' para poder asignarlo desde el inspector
+    public Transform player;
+
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();   
-        player = FindObjectOfType<Agent>().transform;
-        
+        agent = GetComponent<NavMeshAgent>();
+
+        // Si 'player' no se asigna desde el inspector, asignamos un agente por defecto
+        if (player == null)
+        {
+            player = FindObjectOfType<Agent>().transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(player.position);
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+        }
     }
 }
