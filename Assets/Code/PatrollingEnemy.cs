@@ -8,7 +8,6 @@ public class PatrollingAgent : MonoBehaviour
     public NavMeshAgent agent;
     public Transform[] waypoints;
     private int currentWaypointIndex;
-    private bool isForward;
 
     void Start()
     {
@@ -24,9 +23,6 @@ public class PatrollingAgent : MonoBehaviour
         // Seleccionar aleatoriamente el punto de inicio
         currentWaypointIndex = Random.Range(0, waypoints.Length);
 
-        // Establecer la dirección de patrullaje de forma aleatoria
-        isForward = Random.value > 0.5f;
-
         // Establecer el destino inicial
         agent.SetDestination(waypoints[currentWaypointIndex].position);
     }
@@ -36,7 +32,7 @@ public class PatrollingAgent : MonoBehaviour
         // Si el agente ha llegado al waypoint actual
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            // Actualizar el waypoint según la dirección
+            // Actualizar el waypoint para avanzar hacia adelante
             UpdateWaypoint();
 
             // Establecer la nueva posición de destino
@@ -44,28 +40,16 @@ public class PatrollingAgent : MonoBehaviour
         }
     }
 
-    // Actualizar el índice del waypoint según la dirección
+    // Actualizar el índice del waypoint para avanzar hacia adelante
     void UpdateWaypoint()
     {
-        if (isForward)
+        // Avanzar al siguiente waypoint
+        currentWaypointIndex++;
+
+        // Si llegamos al final de los waypoints, reiniciar al primero
+        if (currentWaypointIndex >= waypoints.Length)
         {
-            currentWaypointIndex++;
-            // Si llegamos al final de los waypoints, invertir la dirección
-            if (currentWaypointIndex >= waypoints.Length)
-            {
-                currentWaypointIndex = waypoints.Length - 1;
-                isForward = false;
-            }
-        }
-        else
-        {
-            currentWaypointIndex--;
-            // Si llegamos al primer waypoint, invertir la dirección
-            if (currentWaypointIndex < 0)
-            {
-                currentWaypointIndex = 0;
-                isForward = true;
-            }
+            currentWaypointIndex = 0;
         }
     }
 }
